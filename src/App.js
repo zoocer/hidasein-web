@@ -1,8 +1,16 @@
 import React from 'react'
 import './App.css'
-import Grid from '@material-ui/core/Grid'
-import HDTextField from './components/HDTextField'
-import HDButton from './components/HDButton'
+import { getCodes } from 'country-list'
+import CardList from './CardList'
+import CardInput from './CardInput'
+import * as _ from 'lodash'
+import axios from 'axios'
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch
+} from 'react-router-dom'
 // import { loadCSS } from 'fg-loadcss/src/loadCSS'
 
 const styles = theme => ({
@@ -13,21 +21,14 @@ const styles = theme => ({
 
 class App extends React.Component {
   render() {
-    const classes = styles
     return (
-      <Grid container className={classes.root} justify="center" spacing={16}>
-        <h1>Hi Dasein</h1>
-        <Grid
-          container
-          className={classes.demo}
-          justify="center"
-          alignItems="flex-end"
-          spacing={16}
-        >
-          <HDTextField />
-          <HDButton />
-        </Grid>
-      </Grid>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={CardInput} />
+          <Route path="/cardList" component={CardList} />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </Router>
     )
   }
 }

@@ -20,22 +20,18 @@ const styles = theme => ({
 })
 
 class IconLabelButton extends React.Component {
-  // componentDidMount() {
-  //   loadCSS(
-  //     'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
-  //     document.querySelector('#insertion-point-jss')
-  //   )
-  // }
   render() {
     const { classes } = this.props
-
     return (
-      <div>
-        <Button variant="contained" color="primary" className={classes.button}>
-          Send
-          <SendIcon className={classes.rightIcon} />
-        </Button>
-      </div>
+      <Button
+        variant="contained"
+        onClick={this.props.onClick}
+        color="primary"
+        className={classes.button}
+      >
+        Send
+        <SendIcon className={classes.rightIcon} />
+      </Button>
     )
   }
 }
