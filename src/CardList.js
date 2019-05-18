@@ -3,7 +3,20 @@ import HDCard from './components/HDCard'
 import React from 'react'
 import * as _ from 'lodash'
 import axios from 'axios'
+import { withStyles } from '@material-ui/core/styles'
+import Fade from '@material-ui/core/Fade'
+import { Link } from 'react-router-dom'
 
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: '#e2e2e2'
+  },
+  card: {
+    height: 300,
+    width: 200
+  }
+})
 class CardList extends React.Component {
   constructor(props) {
     super(props)
@@ -24,15 +37,34 @@ class CardList extends React.Component {
 
   render() {
     let cards = this.state.cards
+    const { classes } = this.props
 
+    const fade = true
+    let time = 0
     return (
-      <Grid container justify="center" alignItems="flex-start" spacing={32}>
-        {cards.map(card => {
-          return <HDCard card={card} />
-        })}
+      <Grid>
+        <Link to="/">Back</Link>
+        <Grid
+          container
+          className={classes.root}
+          justify="center"
+          alignItems="flex-start"
+          spacing={32}
+        >
+          {cards.map(card => {
+            time += 200
+            return (
+              <Fade in={fade} timeout={time}>
+                <Grid item>
+                  <HDCard className={classes.card} card={card} />
+                </Grid>
+              </Fade>
+            )
+          })}
+        </Grid>
       </Grid>
     )
   }
 }
 
-export default CardList
+export default withStyles(styles)(CardList)

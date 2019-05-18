@@ -1,28 +1,27 @@
 import React from 'react'
 import './App.css'
-import { getCodes } from 'country-list'
 import CardList from './CardList'
 import CardInput from './CardInput'
-import * as _ from 'lodash'
-import axios from 'axios'
+import { withStyles } from '@material-ui/core/styles'
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch
 } from 'react-router-dom'
-// import { loadCSS } from 'fg-loadcss/src/loadCSS'
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: '#e2e2e2'
   }
 })
 
 class App extends React.Component {
   render() {
+    const { classes } = this.props
     return (
-      <Router>
+      <Router className={classes.root}>
         <Switch>
           <Route path="/" exact component={CardInput} />
           <Route path="/cardList" component={CardList} />
@@ -33,4 +32,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default withStyles(styles)(App)

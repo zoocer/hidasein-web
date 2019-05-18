@@ -7,12 +7,44 @@ import SendIcon from '@material-ui/icons/Send'
 import { getCodes } from 'country-list'
 import * as _ from 'lodash'
 import axios from 'axios'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { Redirect, withRouter, Link } from 'react-router-dom'
+import { withStyles } from '@material-ui/core/styles'
 // import { loadCSS } from 'fg-loadcss/src/loadCSS'
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    // flexGrow: 1,
+    backgroundColor: '#f9f9f9',
+    // display: 'flex',
+    // justifyContent: 'center',
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // flexWrap: 'wrap'
+    position: 'relative'
+  },
+  wrapper: {
+    width: '500px',
+    height: '100px',
+    position: 'absolute',
+    padding: '20px',
+    top: '30%',
+    left: '50%',
+    margin: '-100px 0 0 -270px'
+    // display: 'table',
+    // margin: '0 auto',
+    // verticalAlign: 'middle'
+  },
+  button: {
+    margin: theme.spacing.unit
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit
+  },
+  iconSmall: {
+    fontSize: 20
   }
 })
 
@@ -30,6 +62,7 @@ class CardInput extends React.Component {
 
   componentDidUpdate() {
     console.log('component did update')
+    console.log('card input location', this.props.history)
   }
   randomCode() {
     return _.sample(getCodes())
@@ -52,44 +85,48 @@ class CardInput extends React.Component {
       .then(res => {
         console.log('create talks res: ', res)
         this.setState({
-          currentInput: '',
-          redirectToCardList: true
+          currentInput: ''
         })
+        this.props.history.push('/cardList')
       })
   }
   render() {
-    const classes = styles
-    const redirectToCardList = this.state.redirectToCardList
-    if (redirectToCardList) {
-      return <Redirect to="/cardList" />
-    }
+    const { classes } = this.props
     return (
-      <Grid container className={classes.root} justify="center" spacing={24}>
-        <h1>Hi Dasein</h1>
+      <div className={classes.wrapper}>
         <Grid
           container
-          className={classes.demo}
+          className={classes.wraper}
           justify="center"
-          alignItems="flex-end"
-          spacing={16}
+          spacing={24}
         >
-          <HDTextField
-            value={this.state.currentInput}
-            onChange={event => this.handleInput(event)}
-          />
-          <Button
-            variant="contained"
-            onClick={event => this.handleClickButton(event)}
-            color="primary"
-            className={classes.button}
-          >
-            Send
-            <SendIcon className={classes.rightIcon} />
-          </Button>
+          <h1>Hi Dasein</h1>
+          <Grid container justify="center" alignItems="flex-end" spacing={16}>
+            <Grid item>
+              <HDTextField
+                value={this.state.currentInput}
+                onChange={event => this.handleInput(event)}
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                onClick={event => this.handleClickButton(event)}
+                color="primary"
+                className={classes.button}
+              >
+                Send
+                <SendIcon className={classes.rightIcon} />
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid container justify="center">
+            <Link to="/cardList">Show All</Link>
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
     )
   }
 }
 
-export default CardInput
+export default withStyles(styles)(CardInput)

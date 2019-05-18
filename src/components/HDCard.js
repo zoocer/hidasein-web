@@ -17,7 +17,7 @@ const styles = {
 
 function HDCard(props) {
   const { card } = props
-  console.log('card: ', card)
+  // console.log('card: ', card)
   return (
     <Card>
       <CardContent>
