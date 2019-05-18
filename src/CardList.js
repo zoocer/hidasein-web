@@ -15,6 +15,9 @@ const styles = theme => ({
   card: {
     height: 300,
     width: 200
+  },
+  link: {
+    margin: 20
   }
 })
 class CardList extends React.Component {
@@ -28,7 +31,6 @@ class CardList extends React.Component {
   componentWillMount() {
     let url = 'http://localhost:4141/talks'
     axios.get(url).then(res => {
-      console.log('load cards: ', res)
       this.setState({
         cards: res.data
       })
@@ -43,12 +45,15 @@ class CardList extends React.Component {
     let time = 0
     return (
       <Grid>
-        <Link to="/">Back</Link>
+        <Link className={classes.link} to="/">
+          Back
+        </Link>
         <Grid
           container
           className={classes.root}
           justify="center"
-          alignItems="flex-start"
+          alignItems="center"
+          direction="row"
           spacing={32}
         >
           {cards.map(card => {
