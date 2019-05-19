@@ -6,9 +6,9 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRigh: theme.spacing.unit,
-    width: 200
+    // marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: '100%'
   }
 })
 class HDTextField extends React.Component {
@@ -27,7 +27,6 @@ class HDTextField extends React.Component {
 
     return (
       <TextField
-        label="placeholder"
         placeholder="What do you want to say?"
         multiline
         className={classes.textField}

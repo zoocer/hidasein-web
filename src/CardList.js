@@ -17,7 +17,7 @@ const styles = theme => ({
     width: 200
   },
   link: {
-    margin: 20
+    margin: '40px 0 0 20px'
   }
 })
 class CardList extends React.Component {

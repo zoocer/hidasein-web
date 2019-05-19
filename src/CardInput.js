@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import HDTextField from './components/HDTextField'
 import Button from '@material-ui/core/Button'
 import SendIcon from '@material-ui/icons/Send'
+import Typography from '@material-ui/core/Typography'
 import { getCodes } from 'country-list'
 import * as _ from 'lodash'
 import axios from 'axios'
@@ -23,13 +24,15 @@ const styles = theme => ({
     position: 'relative'
   },
   wrapper: {
-    width: '500px',
-    height: '100px',
+    // width: '100%',
+    // height: '100%'
     position: 'absolute',
-    padding: '20px',
-    top: '30%',
-    left: '50%',
-    margin: '-100px 0 0 -270px'
+    // padding: '20px',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+    // margin: '-100px 0 0 -270px'
     // display: 'table',
     // margin: '0 auto',
     // verticalAlign: 'middle'
@@ -45,6 +48,13 @@ const styles = theme => ({
   },
   iconSmall: {
     fontSize: 20
+  },
+  link: {
+    margin: '50px'
+  },
+  title: {
+    color: '#2D0706',
+    fontFamily: 'Times New Roman'
   }
 })
 
@@ -93,38 +103,56 @@ class CardInput extends React.Component {
   render() {
     const { classes } = this.props
     return (
-      <div className={classes.wrapper}>
-        <Grid
-          container
-          className={classes.wraper}
-          justify="center"
-          spacing={24}
-        >
-          <h1>Hi Dasein</h1>
-          <Grid container justify="center" alignItems="flex-end" spacing={16}>
-            <Grid item>
-              <HDTextField
-                value={this.state.currentInput}
-                onChange={event => this.handleInput(event)}
-              />
+      <Grid
+        className={classes.wrapper}
+        container
+        direction="column"
+        justify="center"
+        alignItems="stretch"
+      >
+        <Grid item xs />
+        <Grid item xs>
+          <Grid container direction="column" spacing={24}>
+            <Grid container direction="row">
+              <Grid item xs={3} />
+              <Grid item xs={3}>
+                <Typography className={classes.title} variant="h2">
+                  Hi Dasein:
+                </Typography>
+              </Grid>
+              <Grid item xs={3} />
+              <Grid item xs={3} />
             </Grid>
-            <Grid item>
-              <Button
-                variant="contained"
-                onClick={event => this.handleClickButton(event)}
-                color="primary"
-                className={classes.button}
-              >
-                Send
-                <SendIcon className={classes.rightIcon} />
-              </Button>
+            <Grid container alignItems="flex-end" spacing={16}>
+              <Grid item xs={3} />
+              <Grid item xs={3}>
+                <HDTextField
+                  value={this.state.currentInput}
+                  onChange={event => this.handleInput(event)}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <Button
+                  variant="contained"
+                  onClick={event => this.handleClickButton(event)}
+                  color="primary"
+                  className={classes.button}
+                >
+                  Send
+                  <SendIcon className={classes.rightIcon} />
+                </Button>
+              </Grid>
+              <Grid item xs={3} />
             </Grid>
-          </Grid>
-          <Grid container justify="center">
-            <Link to="/cardList">Show All</Link>
+            <Grid item container justify="center">
+              <Link className={classes.link} to="/cardList">
+                Show All
+              </Link>
+            </Grid>
           </Grid>
         </Grid>
-      </div>
+        <Grid item xs />
+      </Grid>
     )
   }
 }

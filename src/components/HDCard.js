@@ -2,13 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
+import Typography from '@material-ui/core/Typography'
 import { CardContent } from '@material-ui/core'
 import emojiFlags from 'emoji-flags'
 
 const styles = {
   card: {
-    minWidth: 200,
-    maxWidth: 300,
+    maxWidth: 200,
+    // maxWidth: 300,
     margin: 20
   },
   title: {
@@ -33,7 +34,9 @@ class HDCard extends React.Component {
             <span>{card.date}</span>
             <span role="img">{this.flag(card.code)}</span>
           </p>
-          <span>{card.content}</span>
+          <Typography inline component="p">
+            {card.content}
+          </Typography>
         </CardContent>
       </Card>
     )
