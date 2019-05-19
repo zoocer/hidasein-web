@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: '#e2e2e2'
+    backgroundColor: '#f9f9f9'
   },
   card: {
     height: 300,
@@ -44,7 +44,7 @@ class CardList extends React.Component {
     const fade = true
     let time = 0
     return (
-      <Grid>
+      <Grid className={classes.root}>
         <Link className={classes.link} to="/">
           Back
         </Link>

@@ -8,9 +8,9 @@ import emojiFlags from 'emoji-flags'
 
 const styles = {
   card: {
-    maxWidth: 200,
-    // maxWidth: 300,
-    margin: 20
+    minWidth: 200,
+    maxWidth: 300
+    // margin: 20
   },
   title: {
     fontSize: 18
@@ -27,8 +27,9 @@ class HDCard extends React.Component {
   }
   render() {
     const { card } = this.props
+    const { classes } = this.props
     return (
-      <Card>
+      <Card className={classes.card}>
         <CardContent>
           <p>
             <span>{card.date}</span>

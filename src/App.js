@@ -13,7 +13,7 @@ import {
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: '#e2e2e2'
+    backgroundColor: '#f9f9f9'
   }
 })
 
