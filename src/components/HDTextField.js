@@ -27,7 +27,6 @@ class HDTextField extends React.Component {
 
     return (
       <TextField
-        placeholder="What do you want to say?"
         multiline
         className={classes.textField}
         margin="normal"

@@ -7,7 +7,7 @@ import moment from 'moment'
 
 const styles = {
   card: {
-    minWidth: 200,
+    minWidth: 150,
     maxWidth: 300,
     fontFamily: 'Times New Roman'
   },

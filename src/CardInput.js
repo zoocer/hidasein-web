@@ -114,35 +114,34 @@ class CardInput extends React.Component {
         <Grid item xs>
           <Grid container direction="column" spacing={24}>
             <Grid container direction="row">
-              <Grid item xs={3} />
-              <Grid item xs={3}>
-                <Typography className={classes.title} variant="h2">
+              <Grid item md={3} xs={2} />
+              <Grid item md={3} xs={8}>
+                <Typography className={classes.title} variant="h3">
                   Hi Dasein:
                 </Typography>
               </Grid>
-              <Grid item xs={3} />
-              <Grid item xs={3} />
+              <Grid item md={3} xs="auto" />
+              <Grid item md={3} xs={2} />
             </Grid>
             <Grid container alignItems="flex-end" spacing={16}>
-              <Grid item xs={3} />
-              <Grid item xs={3}>
+              <Grid item md={3} xs={2} />
+              <Grid item md={4} xs={5}>
                 <HDTextField
                   value={this.state.currentInput}
                   onChange={event => this.handleInput(event)}
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={2} xs={3}>
                 <Button
                   variant="contained"
                   onClick={event => this.handleClickButton(event)}
                   color="primary"
                   className={classes.button}
                 >
-                  Send
                   <SendIcon className={classes.rightIcon} />
                 </Button>
               </Grid>
-              <Grid item xs={3} />
+              <Grid item md={3} xs={2} />
             </Grid>
             <Grid item container justify="center">
               <Link className={classes.link} to="/cardList">
