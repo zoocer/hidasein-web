@@ -1,16 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
-import { CardContent } from '@material-ui/core'
+import { CardContent, Card, Grid } from '@material-ui/core'
 import emojiFlags from 'emoji-flags'
+import moment from 'moment'
 
 const styles = {
   card: {
     minWidth: 200,
-    maxWidth: 300
-    // margin: 20
+    maxWidth: 300,
+    fontFamily: 'Times New Roman'
   },
   title: {
     fontSize: 18
@@ -25,16 +24,23 @@ class HDCard extends React.Component {
     }
     return '🌍'
   }
+  dateFormat(date) {
+    return moment(date).format('YYYY·M·D  HH:mm')
+  }
   render() {
     const { card } = this.props
     const { classes } = this.props
     return (
       <Card className={classes.card}>
         <CardContent>
-          <p>
-            <span>{card.date}</span>
-            <span role="img">{this.flag(card.code)}</span>
-          </p>
+          <Grid container direction="row" alignItems="center">
+            <Grid item xs={9}>
+              <span>{this.dateFormat(card.date)}</span>
+            </Grid>
+            <Grid item container xs={3} justify="flex-end">
+              <span role="img">{this.flag(card.code)}</span>
+            </Grid>
+          </Grid>
           <Typography inline component="p">
             {card.content}
           </Typography>
