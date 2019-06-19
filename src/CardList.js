@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react'
 import * as _ from 'lodash'
 import axios from 'axios'
@@ -57,6 +58,10 @@ class CardList extends React.Component {
           page: page + 1,
           hasMore: data.length >= pageSize,
           loadingStatus: false
+        }, () => {
+          new Masonry('.msnry-grid', {
+            itemSelector: '.msnry-grid-item',
+          });
         })
       })
     })
@@ -68,8 +73,8 @@ class CardList extends React.Component {
     const loader = (
       <CircularProgress key={0} />
     )
-    const fade = true
-    let time = 0
+    // const fade = true
+    // let time = 0
     return (
       <Grid className={classes.root}>
         <InfiniteScroll
@@ -81,12 +86,13 @@ class CardList extends React.Component {
           <Grid
             container
             spacing={3}
+            className="msnry-grid"
           >
             {cards.map(card => {
-              time += 200
+              // time += 200
               return (
-                <Fade key={card._id} in={fade} timeout={time}>
-                  <Grid item xs={12} md={3}>
+                <Fade key={card._id} in={true} timeout={300}>
+                  <Grid item xs={12} md={3} className="msnry-grid-item" style={{ width: '100%' }}>
                     <HDCard className={classes.card} card={card} />
                   </Grid>
                 </Fade>
