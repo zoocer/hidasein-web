@@ -2,8 +2,8 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { CardContent, Card, Grid } from '@material-ui/core'
-import emojiFlags from 'emoji-flags'
 import moment from 'moment'
+import getFlag from '../utils/getFlag'
 
 const styles = {
   card: {
@@ -20,12 +20,6 @@ const styles = {
 }
 
 class HDCard extends React.Component {
-  flag(code) {
-    if (code) {
-      return emojiFlags.countryCode(code).emoji
-    }
-    return '🌍'
-  }
   dateFormat(date) {
     return moment(date).format('YYYY·M·D HH:mm')
   }
@@ -40,7 +34,7 @@ class HDCard extends React.Component {
               <span className="text-time">{this.dateFormat(card.date)}</span>
             </Grid>
             <Grid item container xs={3} justify="flex-end">
-              <span role="img">{this.flag(card.code)}</span>
+              <span role="img">{getFlag(card.code).img}</span>
             </Grid>
           </Grid>
           <Typography component="p" className="text-content">

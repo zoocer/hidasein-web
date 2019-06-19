@@ -1,18 +1,22 @@
 import React from 'react'
-import './App.css'
-import CardList from './CardList'
-import CardInput from './CardInput'
-import { withStyles } from '@material-ui/core/styles'
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch
 } from 'react-router-dom'
+import './App.css'
+import { withStyles } from '@material-ui/core/styles'
+
+import CardList from './CardList'
+import CardInput from './CardInput'
+import CommonFooter from './components/CommonFooter'
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    display: 'flex',
+    minHeight: '100vh',
+    flexDirection: 'column',
     backgroundColor: '#f9f9f9'
   }
 })
@@ -20,13 +24,17 @@ const styles = theme => ({
 class App extends React.Component {
   render() {
     const { classes } = this.props
+
     return (
-      <Router className={classes.root}>
-        <Switch>
-          <Route path="/" exact component={CardInput} />
-          <Route path="/cardList" component={CardList} />
-          <Redirect from="*" to="/" />
-        </Switch>
+      <Router>
+        <div className={classes.root}>
+          <Switch>
+            <Route path="/" exact component={CardInput} />
+            <Route path="/cardList" component={CardList} />
+            <Redirect from="*" to="/" />
+          </Switch>
+          <CommonFooter />
+        </div>
       </Router>
     )
   }
