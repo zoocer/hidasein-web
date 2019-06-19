@@ -1,95 +1,92 @@
-import Grid from '@material-ui/core/Grid'
-import HDCard from './components/HDCard'
 import React from 'react'
 import * as _ from 'lodash'
 import axios from 'axios'
-import { withStyles } from '@material-ui/core/styles'
+
+import Grid from '@material-ui/core/Grid'
 import Fade from '@material-ui/core/Fade'
-import { Link } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import { withStyles } from '@material-ui/core/styles'
+import commonConfig from './utils/commonConfig'
+
 import InfiniteScroll from 'react-infinite-scroller'
+import HDCard from './components/HDCard'
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: '#f9f9f9'
+    backgroundColor: '#f9f9f9',
+    padding: '5% 10%'
   },
   card: {
-    height: 300,
-    width: 200
+    whiteSpace: 'nowrap'
   },
-  link: {
-    margin: '40px 0 0 20px'
-  }
 })
 class CardList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       page: 0,
+      pageSize: 10,
+      cards: [],
       hasMore: true,
-      cards: []
+      loadingStatus: false,
     }
   }
 
-  componentWillMount() {
-    this.loadNextPage()
-  }
+  loadNextPage = () => {
+    const apiUrl = `${commonConfig.apiDomain}/talks`
+    const { page, pageSize, cards, loadingStatus } = this.state
 
-  loadNextPage() {
-    let baseUrl = 'http://localhost:4141/talks'
-    const page = this.state.page
-    const requestUrl = baseUrl + '?page=' + page
-    let cards = this.state.cards || []
+    if (loadingStatus) {
+      return
+    }
 
-    axios.get(requestUrl).then(res => {
-      const { data } = res.data
-      if (data.length === 0) {
-        this.setState({
-          hasMore: false
-        })
-      } else {
+    this.setState({
+      loadingStatus: true
+    }, () => {
+      const reqData = {
+        page,
+        pageSize
+      }
+      axios.get(apiUrl, {
+        params: reqData,
+      }).then(res => {
+        const { data } = res.data
         this.setState({
           cards: _.concat(cards, data),
-          page: page + 1
+          page: page + 1,
+          hasMore: data.length >= pageSize,
+          loadingStatus: false
         })
-      }
+      })
     })
   }
 
   render() {
-    let cards = this.state.cards
+    const { cards, hasMore } = this.state
     const { classes } = this.props
-    // const loader = (
-    //   <div>
-    //     <span>Loading...</span>
-    //   </div>
-    // )
+    const loader = (
+      <CircularProgress key={0} />
+    )
     const fade = true
     let time = 0
     return (
       <Grid className={classes.root}>
-        <Link className={classes.link} to="/">
-          Back
-        </Link>
         <InfiniteScroll
           pageStart={0}
-          loadMore={this.loadNextPage.bind(this)}
-          // loader={loader}
-          hasMore={this.state.hasMore}
+          loadMore={this.loadNextPage}
+          hasMore={hasMore}
+          loader={loader}
         >
           <Grid
             container
-            className={classes.root}
-            justify="center"
-            alignItems="center"
-            direction="row"
-            spacing={6}
+            spacing={3}
           >
             {cards.map(card => {
               time += 200
               return (
                 <Fade key={card._id} in={fade} timeout={time}>
-                  <Grid item>
+                  <Grid item xs={12} md={3}>
                     <HDCard className={classes.card} card={card} />
                   </Grid>
                 </Fade>
