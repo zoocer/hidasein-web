@@ -40,15 +40,16 @@ class CardList extends React.Component {
     const page = this.state.page
     const requestUrl = baseUrl + '?page=' + page
     let cards = this.state.cards || []
-    console.log('url:', requestUrl)
+
     axios.get(requestUrl).then(res => {
-      if (res.data.length === 0) {
+      const { data } = res.data
+      if (data.length === 0) {
         this.setState({
           hasMore: false
         })
       } else {
         this.setState({
-          cards: _.concat(cards, res.data),
+          cards: _.concat(cards, data),
           page: page + 1
         })
       }
@@ -58,11 +59,11 @@ class CardList extends React.Component {
   render() {
     let cards = this.state.cards
     const { classes } = this.props
-    const loader = (
-      <div>
-        <span>Loading...</span>
-      </div>
-    )
+    // const loader = (
+    //   <div>
+    //     <span>Loading...</span>
+    //   </div>
+    // )
     const fade = true
     let time = 0
     return (
@@ -73,7 +74,7 @@ class CardList extends React.Component {
         <InfiniteScroll
           pageStart={0}
           loadMore={this.loadNextPage.bind(this)}
-          loader={loader}
+          // loader={loader}
           hasMore={this.state.hasMore}
         >
           <Grid
@@ -82,7 +83,7 @@ class CardList extends React.Component {
             justify="center"
             alignItems="center"
             direction="row"
-            spacing={32}
+            spacing={6}
           >
             {cards.map(card => {
               time += 200

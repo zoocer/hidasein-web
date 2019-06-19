@@ -41,7 +41,7 @@ class HDCard extends React.Component {
               <span role="img">{this.flag(card.code)}</span>
             </Grid>
           </Grid>
-          <Typography inline component="p">
+          <Typography component="p">
             {card.content}
           </Typography>
         </CardContent>

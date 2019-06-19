@@ -1,14 +1,20 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   textField: {
     // marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: '100%'
+    // marginRight: theme.spacing.unit,
+    width: '100%',
+    '& .MuiInputBase-root': {
+      fontSize: '2.5rem',
+      color: '#2D0706'
+    },
+    '& .MuiInput-underline:before': {
+      borderBottom: '1px solid #F1F1F1'
+    }
   }
 })
 class HDTextField extends React.Component {
