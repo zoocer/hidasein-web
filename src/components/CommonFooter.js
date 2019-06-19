@@ -1,5 +1,4 @@
 import React from 'react'
-import * as _ from 'lodash'
 import axios from 'axios'
 
 import Typography from '@material-ui/core/Typography';

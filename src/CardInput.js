@@ -32,10 +32,10 @@ const styles = theme => ({
     right: 0,
     bottom: '15px'
   },
-  loadingWrap: {
-    width: '100%',
-    textAlign: 'center'
-  }
+  // loadingWrap: {
+  //   width: '100%',
+  //   textAlign: 'center'
+  // }
 })
 
 class CardInput extends React.Component {
@@ -103,25 +103,26 @@ class CardInput extends React.Component {
               value={this.state.currentInput}
               onChange={event => this.handleInput(event)}
             />
-            <Button
-              variant="contained"
-              onClick={event => this.handleClickButton(event)}
-              color="primary"
-              className={classes.sendBtn}
-            >
-              <SendIcon />
-            </Button>
+            {
+              !loaddingStatus &&
+              <Button
+                variant="contained"
+                onClick={event => this.handleClickButton(event)}
+                color="primary"
+                className={classes.sendBtn}
+              >
+                <SendIcon />
+              </Button>
+            }
+            {
+              loaddingStatus &&
+              <CircularProgress className={classes.sendBtn} />
+            }
           </div>
           {/* <Link className={classes.link} to="/cardList">
             Show All
           </Link> */}
         </Container>
-        {
-          loaddingStatus &&
-          <div className={classes.loadingWrap}>
-            <CircularProgress />
-          </div>
-        }
       </React.Fragment>
     )
   }
