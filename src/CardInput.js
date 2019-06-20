@@ -1,7 +1,4 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
-import Button from '@material-ui/core/Button'
-import SendIcon from '@material-ui/icons/Send'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -13,6 +10,7 @@ import axios from 'axios'
 import { getCodes } from 'country-list'
 import commonConfig from './utils/commonConfig'
 import HDTextField from './components/HDTextField'
+import HDSendButton from './components/HDSendButton'
 
 const styles = theme => ({
   root: {
@@ -30,12 +28,8 @@ const styles = theme => ({
   sendBtn: {
     position: 'absolute',
     right: 0,
-    bottom: '15px'
+    bottom: '25px'
   },
-  // loadingWrap: {
-  //   width: '100%',
-  //   textAlign: 'center'
-  // }
 })
 
 class CardInput extends React.Component {
@@ -57,7 +51,7 @@ class CardInput extends React.Component {
       currentInput: event.target.value
     })
   }
-  handleClickButton = event => {
+  handleClickButton = () => {
     const { currentInput, loaddingStatus } = this.state
     if (currentInput === '' || loaddingStatus) {
       return
@@ -105,14 +99,19 @@ class CardInput extends React.Component {
             />
             {
               !loaddingStatus &&
-              <Button
-                variant="contained"
-                onClick={event => this.handleClickButton(event)}
-                color="primary"
-                className={classes.sendBtn}
-              >
-                <SendIcon />
-              </Button>
+              <div className={classes.sendBtn}>
+                <HDSendButton
+                  handleClickCb={() => this.handleClickButton()}
+                />
+              </div>
+              // <Button
+              //   variant="contained"
+              //   onClick={event => this.handleClickButton(event)}
+              //   color="primary"
+              //   className={classes.sendBtn}
+              // >
+              //   <SendIcon />
+              // </Button>
             }
             {
               loaddingStatus &&
