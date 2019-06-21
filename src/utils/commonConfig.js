@@ -4,10 +4,10 @@ const { hostname } = window.location;
 const isTest = hostname.indexOf('test') !== -1;
 const isLocal = hostname.indexOf('localhost') !== -1;
 
-let apiDomain = '/';
+let apiDomain = '';
 
-if (isTest || isLocal) {
-  // 测试环境
+if (isLocal) {
+  // 本地开发环境
   apiDomain = '//localhost:4141';
 }
 
